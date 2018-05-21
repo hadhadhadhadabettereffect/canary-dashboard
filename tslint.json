@@ -12,6 +12,7 @@
     "no-consecutive-blank-lines": false,
     "no-bitwise": false,
     "jsx-no-multiline-js": false,
-    "no-console": false
+    "no-console": false,
+    "jsx-boolean-value": false
   }
 }

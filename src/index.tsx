@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import DeviceActionCreators from "./actions/DeviceActionCreators";
-import DeviceList from "./components/DeviceList";
+import Dashboard from "./components/Dashboard";
 import "./listeners";
 
 ReactDOM.render(
-    <DeviceList />,
+    <Dashboard />,
     document.getElementById("root") as HTMLElement
 );
 
