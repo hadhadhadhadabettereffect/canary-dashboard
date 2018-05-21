@@ -1,9 +1,14 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:recommended", "tslint-react"],
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
       "node_modules/**/*.ts"
     ]
+  },
+  "rules": {
+    "only-arrow-functions": false,
+    "trailing-comma": false,
+    "no-consecutive-blank-lines": false
   }
 }

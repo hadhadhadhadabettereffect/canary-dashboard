@@ -26,11 +26,16 @@ class DeviceContainer extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                {(this.state as any).devices.map((d, i) =>
-                    <DeviceRow key={i} name={d.name} type={d.type} value={d.value} />)}
+                    {this.getRows()}
                 </tbody>
             </table>
         );
+    }
+
+    private getRows() {
+        return (this.state as any).devices.map((d, i) => {
+            return <DeviceRow key={i} name={d.name} type={d.type} value={d.value} />;
+        });
     }
 }
 
