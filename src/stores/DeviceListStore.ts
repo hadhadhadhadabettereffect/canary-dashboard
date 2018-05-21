@@ -3,13 +3,16 @@ import { ActionTypes } from "../constants/AppConstants";
 import AppDispatcher from "../dispatcher/AppDispatcher";
 
 
-class DeviceStore extends (ReduceStore as any) {
+class DeviceListStore extends (ReduceStore as any) {
     public getInitialState() {
         return [];
     }
 
     public reduce(state, action) {
         switch (action.type) {
+            case ActionTypes.expand:
+                return state;
+
             case ActionTypes.load:
                 return action.data;
         }
@@ -17,4 +20,4 @@ class DeviceStore extends (ReduceStore as any) {
     }
 }
 
-export default new (DeviceStore as any)(AppDispatcher);
+export default new (DeviceListStore as any)(AppDispatcher);

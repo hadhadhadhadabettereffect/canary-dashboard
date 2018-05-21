@@ -5,3 +5,6 @@ export const enum ActionTypes {
     delete,
 }
 
+export const enum ClickAction {
+    deviceRow
+}

@@ -21,6 +21,7 @@ req.open("GET", "/devices");
 const DeviceActionCreators = {
 
     expand(row: number) {
+        console.log(row);
         AppDispatcher.dispatch({
             data: row,
             type: ActionTypes.expand

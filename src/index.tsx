@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import DeviceActionCreators from "./actions/DeviceActionCreators";
 import DeviceList from "./components/DeviceList";
-import "./styles.css";
+import "./listeners";
 
 ReactDOM.render(
     <DeviceList />,

@@ -9,6 +9,9 @@
   "rules": {
     "only-arrow-functions": false,
     "trailing-comma": false,
-    "no-consecutive-blank-lines": false
+    "no-consecutive-blank-lines": false,
+    "no-bitwise": false,
+    "jsx-no-multiline-js": false,
+    "no-console": false
   }
 }
