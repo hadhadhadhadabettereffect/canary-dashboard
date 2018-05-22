@@ -48,9 +48,12 @@ export function postNewDevice(dataString: string) {
     req.setRequestHeader("Content-type", "application/json");
     req.send(dataString);
     req.onload = function() {
+        const success = req.status === 201;
+        // get updated device list if creation successful
+        if (success) getDeviceList();
         DeviceActionCreators.showMsg({
             success: req.status === 201,
-            text: req.status === 201 ? "device creation successful" : req.responseText
+            text: success ? "device creation successful" : req.responseText
         });
      };
 }
