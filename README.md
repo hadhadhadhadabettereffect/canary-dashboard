@@ -17,3 +17,7 @@
 * 'src/index.tsx' - entry for main js bundle
 * 'public/worker.js' - web worker for parsing api data
 * 'public/index.html'
+
+### Assumptions
+
+* the "value" property for devices and readings will always be an integer and can be expressed as an 8-bit int (between -128 and 127). If this is not the case, the array type for the values array in public/worker.js can be changed

@@ -3,17 +3,17 @@ import { ActionTypes } from "../constants/AppConstants";
 import AppDispatcher from "../dispatcher/AppDispatcher";
 
 
-class StatsStore extends (ReduceStore as any) {
+class DeviceReadingsStore extends (ReduceStore as any) {
     public getInitialState() {
         return null;
     }
 
     public reduce(state, action) {
-        if (action.type === ActionTypes.stats) {
+        if (action.type === ActionTypes.readings) {
             return action.data;
         }
         return state;
     }
 }
 
-export default new (StatsStore as any)(AppDispatcher);
+export default new (DeviceReadingsStore as any)(AppDispatcher);

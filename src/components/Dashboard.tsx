@@ -1,20 +1,25 @@
 import * as React from "react";
 
-import Grid from "@material-ui/core/Grid";
-
 import DeviceList from "./DeviceList";
-import Overview from "./Overview";
+import DeviceReadings from "./DeviceReadings";
+import ReadingsStats from "./ReadingsStats";
 
+import "./Dashboard.css";
+
+/**
+ * wrapping container
+ */
 function Dashboard() {
     return (
-        <Grid container spacing={24}>
-            <Grid item>
+        <div id="dashboard">
+            <div className="col-1">
                 <DeviceList />
-            </Grid>
-            <Grid item>
-                <Overview />
-            </Grid>
-        </Grid>
+            </div>
+            <div className="col-2">
+                <ReadingsStats />
+                <DeviceReadings />
+            </div>
+        </div>
     );
 }
 

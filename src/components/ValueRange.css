@@ -1,0 +1,11 @@
+.valuerange {
+    text-align: left;
+    width: 100%;
+    max-width: 300px;
+    padding: 0 16px;
+}
+
+.valuerange__cell {
+    display: inline-block;
+    width: 25%;
+}

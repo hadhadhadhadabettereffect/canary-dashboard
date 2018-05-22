@@ -1,13 +1,14 @@
 export const enum ActionTypes {
     load,
     focus,
-    details,
+    stats,
+    readings,
     add,
     delete,
-    stats
 }
 
 export const enum ClickAction {
     deviceRow,
-    addDevice
+    toggleList,
+    addDevice,
 }
