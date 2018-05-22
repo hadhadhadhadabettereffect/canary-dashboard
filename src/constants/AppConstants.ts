@@ -3,8 +3,7 @@ export const enum ActionTypes {
     focus,
     stats,
     readings,
-    add,
-    delete,
+    msg
 }
 
 export const enum ClickAction {

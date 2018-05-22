@@ -1,4 +1,6 @@
+import DeviceActionCreators from "./actions/DeviceActionCreators";
 import { worker } from "./workerInterface";
+
 
 export function getDeviceReadings(device: string) {
     const req = new XMLHttpRequest();
@@ -7,7 +9,9 @@ export function getDeviceReadings(device: string) {
         if (req.readyState === XMLHttpRequest.DONE && req.status === 200) {
             try {
                 res = JSON.parse(req.responseText);
-            } catch (e) { throw e(); }
+            } catch (e) {
+                throw e();
+            }
             worker.postMessage({
                 data: res,
                 type: "readings"
@@ -25,7 +29,9 @@ export function getDeviceList() {
         if (req.readyState === XMLHttpRequest.DONE && req.status === 200) {
             try {
                 res = JSON.parse(req.responseText);
-            } catch (e) { throw e(); }
+            } catch (e) {
+                throw e();
+            }
             worker.postMessage({
                 data: res,
                 type: "list"
@@ -34,4 +40,17 @@ export function getDeviceList() {
     };
     req.open("GET", "/devices");
     req.send();
+}
+
+export function postNewDevice(dataString: string) {
+    const req = new XMLHttpRequest();
+    req.open("POST", "/devices");
+    req.setRequestHeader("Content-type", "application/json");
+    req.send(dataString);
+    req.onload = function() {
+        DeviceActionCreators.showMsg({
+            success: req.status === 201,
+            text: req.status === 201 ? "device creation successful" : req.responseText
+        });
+     };
 }

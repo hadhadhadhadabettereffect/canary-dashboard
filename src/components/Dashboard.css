@@ -5,6 +5,16 @@ body {
 }
 
 #dashboard {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.dashboard__inner {
+    position: relative;
     width: 1200px;
     max-width: 100%;
     height: 100%;

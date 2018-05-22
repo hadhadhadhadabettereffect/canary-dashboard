@@ -10,7 +10,15 @@ const DeviceActionCreators = {
             data: device,
             type: ActionTypes.focus
         });
+    },
+
+    showMsg(msg: any) {
+        AppDispatcher.dispatch({
+            data: msg,
+            type: ActionTypes.msg
+        });
     }
+
 };
 
 export default DeviceActionCreators;
