@@ -26,6 +26,7 @@ class ReadingsStats extends React.Component <{}, {stats}> {
                 max={stats.max}
                 ave={stats.ave}
                 count={stats.count}
+                label=""
             />
         );
     }

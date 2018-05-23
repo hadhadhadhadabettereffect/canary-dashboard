@@ -1,10 +1,10 @@
-import DeviceActionCreators from "./actions/DeviceActionCreators";
+import DashboardActionCreators from "./actions/DashboardActionCreators";
 import { worker } from "./workerInterface";
 
 
-export function getDeviceReadings(device: string) {
+export function getReadingsList(device: string) {
     const req = new XMLHttpRequest();
-    req.onreadystatechange = () => {
+    req.onreadystatechange = function() {
         let res;
         if (req.readyState === XMLHttpRequest.DONE && req.status === 200) {
             try {
@@ -18,13 +18,13 @@ export function getDeviceReadings(device: string) {
             });
         }
     };
-    req.open("GET", "/devices/" + device + "/readings");
+    req.open("GET", "/devices/" + device + "/readings", true);
     req.send();
 }
 
 export function getDeviceList() {
     const req = new XMLHttpRequest();
-    req.onreadystatechange = () => {
+    req.onreadystatechange = function() {
         let res;
         if (req.readyState === XMLHttpRequest.DONE && req.status === 200) {
             try {
@@ -44,16 +44,34 @@ export function getDeviceList() {
 
 export function postNewDevice(dataString: string) {
     const req = new XMLHttpRequest();
-    req.open("POST", "/devices");
+    req.open("POST", "/devices", true);
     req.setRequestHeader("Content-type", "application/json");
     req.send(dataString);
     req.onload = function() {
         const success = req.status === 201;
         // get updated device list if creation successful
         if (success) getDeviceList();
-        DeviceActionCreators.showMsg({
-            success: req.status === 201,
+        DashboardActionCreators.showMsg({
+            success: !!success,
             text: success ? "device creation successful" : req.responseText
         });
-     };
+    };
+}
+
+export function deleteDevice(id: string) {
+    DashboardActionCreators.deleteDevice(id);
+    const req = new XMLHttpRequest();
+    req.open("DELETE", "/devices/" + id, true);
+    req.onreadystatechange = function() {
+        if (req.readyState === 4) {
+            console.log(req);
+            const success = req.status >= 200 && req.status < 300;
+            if (success) getDeviceList();
+            DashboardActionCreators.showMsg({
+                success: !!success,
+                text: success ? "device successfully removed" : req.responseText
+            });
+        }
+    };
+    req.send(null);
 }

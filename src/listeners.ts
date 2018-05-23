@@ -1,17 +1,33 @@
-import DeviceActionCreators from "./actions/DeviceActionCreators";
-import { ClickAction } from "./constants/AppConstants";
+import DashboardActionCreators from "./actions/DashboardActionCreators";
+import { ClickTarget } from "./constants/AppConstants";
 
-document.body.addEventListener("mousedown", function(event) {
-    const action = (event.target as HTMLElement).getAttribute("data-action");
-    if (action !== null) {
-        switch ((action as any) | 0 ) {
-            case ClickAction.deviceRow:
-                DeviceActionCreators.focus(
-                    (event.target as HTMLElement).getAttribute("data-device") as any);
+
+document.body.addEventListener("mousedown", function(event: MouseEvent) {
+    const target = (event.target as HTMLElement).getAttribute("data-target");
+
+    if (target !== null) {
+        switch ((target as any) | 0 ) {
+            case ClickTarget.deviceRow:
+                handleRowClick(event);
                 break;
 
-            case ClickAction.addDevice:
+            case ClickTarget.chart:
+                console.log("start chart");
                 break;
         }
     }
 }, false);
+
+function handleRowClick(event: MouseEvent) {
+    const deviceData = {
+        id: (event.target as HTMLElement).getAttribute("data-id"),
+        name: (event.target as HTMLElement).getAttribute("data-name"),
+        type: (event.target as HTMLElement).getAttribute("data-type"),
+    };
+
+    if (deviceData.id !== null ||
+        deviceData.name !== null ||
+        deviceData.type !== null) {
+            DashboardActionCreators.focus(deviceData);
+        }
+}

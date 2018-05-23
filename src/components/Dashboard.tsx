@@ -1,13 +1,15 @@
 import * as React from "react";
 
 import DeviceList from "./DeviceList";
-import DeviceReadings from "./DeviceReadings";
+// import ReadingsList from "./ReadingsList";
 import FlashMsg from "./FlashMsg";
 import Nav from "./Nav";
-import ReadingsStats from "./ReadingsStats";
+// import ReadingsStats from "./ReadingsStats";
 
+import DeviceDetails from "./DeviceDetails";
 
 import "./Dashboard.css";
+
 
 /**
  * wrapping container
@@ -22,8 +24,7 @@ function Dashboard() {
                         <DeviceList />
                     </div>
                     <div className="col-2">
-                        <ReadingsStats />
-                        <DeviceReadings />
+                        <DeviceDetails />
                     </div>
                 </div>
             </div>

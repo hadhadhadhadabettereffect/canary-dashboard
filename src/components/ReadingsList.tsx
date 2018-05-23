@@ -1,18 +1,18 @@
 import { Container } from "flux/utils";
 import * as React from "react";
 
-import DeviceReadingsStore from "../stores/DeviceReadingsStore";
+import ReadingsListStore from "../stores/ReadingsListStore";
 import FakeTable from "./FakeTable";
 
 
-class DeviceReadings extends React.Component<{}, {data}> {
+class ReadingsList extends React.Component<{}, {data}> {
     public static getStores() {
-        return [DeviceReadingsStore];
+        return [ReadingsListStore];
     }
 
     public static calculateState(prevState) {
         return {
-            data: DeviceReadingsStore.getState()
+            data: ReadingsListStore.getState()
         };
     }
 
@@ -37,4 +37,4 @@ class DeviceReadings extends React.Component<{}, {data}> {
 
 }
 
-export default Container.create(DeviceReadings);
+export default Container.create(ReadingsList);

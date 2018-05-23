@@ -12,6 +12,7 @@ import {
     Select,
     TextField,
 } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 
 import { postNewDevice } from "../requests";
 
@@ -20,13 +21,15 @@ interface FormDialogState {
     deviceName: string;
     deviceType: string;
     open: boolean;
+    inputErr: boolean;
 }
 
 export default class FormDialog extends React.Component <{}, FormDialogState> {
     public state = {
         deviceName: "",
         deviceType: "temperature",
-        open: false
+        open: false,
+        inputErr: false
     };
 
     public handleClickOpen = () => {
@@ -37,14 +40,16 @@ export default class FormDialog extends React.Component <{}, FormDialogState> {
         this.setState({
             deviceName: "",
             deviceType: "temperature",
-            open: false
+            open: false,
+            inputErr: false
         });
     }
 
     public handleSend = () => {
-        if (this.state.deviceType.length === 0 ||
-            this.state.deviceName.length === 0) {
-                console.warn("name and type fields are required");
+        if (this.state.deviceName.length === 0) {
+            this.setState({
+                inputErr: true
+            });
         } else {
             const str = JSON.stringify({
                 name: this.state.deviceName,
@@ -65,7 +70,14 @@ export default class FormDialog extends React.Component <{}, FormDialogState> {
     public render() {
         return (
             <div>
-                <Button onClick={this.handleClickOpen} color="inherit">+ Device</Button>
+                <Button
+                    onClick={this.handleClickOpen}
+                    color="inherit"
+                    mini
+                >
+                    <AddIcon />
+                    add device
+                </Button>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -75,6 +87,8 @@ export default class FormDialog extends React.Component <{}, FormDialogState> {
                         <form autoComplete="off">
                             <TextField
                                 autoFocus
+                                required
+                                error={this.state.inputErr}
                                 margin="dense"
                                 id="device-name"
                                 label="Device name"

@@ -1,7 +1,8 @@
 import * as React from "react";
 
-// import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import {
+    Typography
+} from "@material-ui/core";
 
 import "./ValueRange.css";
 
@@ -11,6 +12,7 @@ interface ValueRangeProps {
     max: number;
     ave: number;
     count: number;
+    label: string;
 }
 
 /**
@@ -19,11 +21,10 @@ interface ValueRangeProps {
 function ValueRange(props: ValueRangeProps) {
     return (
         <div className="valuerange">
-            <div className="valuerange__cell">
-                <Typography>
-                    {props.count}
+            <div className="valuerange__label">
+                <Typography variant="subheading">
+                    {props.label}
                 </Typography>
-                <Typography variant="caption">total</Typography>
             </div>
             <div className="valuerange__cell">
                 <Typography>
@@ -35,7 +36,7 @@ function ValueRange(props: ValueRangeProps) {
                 <Typography>
                     {props.ave}
                 </Typography>
-                <Typography variant="caption">average</Typography>
+                <Typography variant="caption">ave</Typography>
             </div>
             <div className="valuerange__cell">
                 <Typography>

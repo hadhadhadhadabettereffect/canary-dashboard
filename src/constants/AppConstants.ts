@@ -3,11 +3,11 @@ export const enum ActionTypes {
     focus,
     stats,
     readings,
-    msg
+    msg,
+    delete,
 }
 
-export const enum ClickAction {
+export const enum ClickTarget {
     deviceRow,
-    toggleList,
-    addDevice,
+    chart,
 }

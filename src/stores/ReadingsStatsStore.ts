@@ -11,6 +11,8 @@ class ReadingStatsStore extends (ReduceStore as any) {
     public reduce(state, action) {
         if (action.type === ActionTypes.stats) {
             return action.data;
+        } else if (action.type === ActionTypes.delete) {
+            return null;
         }
         return state;
     }

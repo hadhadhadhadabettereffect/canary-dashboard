@@ -36,6 +36,7 @@ class FlashMsg extends React.Component<{}, { msg: string; open: boolean; success
                     vertical: "bottom",
                 }}
                 open={this.state.open}
+                color={this.state.success ? "primary" : "error"}
                 autoHideDuration={500}
                 message={<span id="message-id">{this.state.msg}</span>}
                 action={[

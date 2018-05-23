@@ -3,20 +3,20 @@ import * as React from "react";
 
 import Paper from "@material-ui/core/Paper";
 
-import DeviceFocusStore from "../stores/DeviceFocusStore";
+import DeviceDetailsStore from "../stores/DeviceDetailsStore";
 import DeviceListStore from "../stores/DeviceListStore";
 import DeviceListGroup from "./DeviceListGroup";
 
 
 class DeviceList extends React.Component<{}, { devices: any; focus: string|null; }> {
     public static getStores() {
-        return [DeviceListStore, DeviceFocusStore];
+        return [DeviceListStore, DeviceDetailsStore];
     }
 
     public static calculateState(prevState) {
         return {
             devices: DeviceListStore.getState(),
-            focus: DeviceFocusStore.getState()
+            focus: DeviceDetailsStore.getState().id
         };
     }
 
