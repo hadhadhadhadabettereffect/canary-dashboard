@@ -4,12 +4,12 @@ import * as React from "react";
 import Paper from "@material-ui/core/Paper";
 import AddIcon from "@material-ui/icons/Add";
 
-import { readingFormFields } from "../constants/formfields";
-import { postNewReading } from "../requests";
-import ReadingsListStore from "../stores/ReadingsListStore";
-import DeviceDetailsStore from "../stores/DeviceDetailsStore";
-import FakeTable from "./FakeTable";
-import PopupForm from "./PopupForm";
+import { readingFormFields } from "../../constants/formfields";
+import { postNewReading } from "../../requests";
+import ReadingsListStore from "../../stores/ReadingsListStore";
+import DeviceDetailsStore from "../../stores/DeviceDetailsStore";
+import FakeTable from "../FakeTable";
+import PopupForm from "../PopupForm";
 
 
 function createReading(data) {

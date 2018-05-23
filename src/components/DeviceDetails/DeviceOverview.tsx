@@ -8,9 +8,9 @@ import {
 import DeleteIcon from "@material-ui/icons/Delete";
 
 import DeviceDetailsStore,
-    { DeviceDetailsState } from "../stores/DeviceDetailsStore";
-import { deleteDevice } from "../requests";
-import { setChartType } from "./Chart";
+    { DeviceDetailsState } from "../../stores/DeviceDetailsStore";
+import { deleteDevice } from "../../requests";
+import { setChartType } from "../Chart";
 
 class DeviceOverview extends React.Component<{}, DeviceDetailsState> {
     public static getStores() {

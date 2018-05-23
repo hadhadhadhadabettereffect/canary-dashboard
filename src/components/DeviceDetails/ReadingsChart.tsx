@@ -1,13 +1,13 @@
 import { Container } from "flux/utils";
 import * as React from "react";
 
-import { chartOptions } from "../constants/options";
-import ReadingsListStore from "../stores/ReadingsListStore";
+import { chartOptions } from "../../constants/options";
+import ReadingsListStore from "../../stores/ReadingsListStore";
 import {
     mountChart,
     setData,
     unmount,
- } from "./Chart";
+ } from "../Chart";
 
 class ReadingsChart extends React.Component<{}, { values: any; focus: string | null; }> {
 

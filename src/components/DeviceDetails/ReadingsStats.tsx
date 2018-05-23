@@ -1,25 +1,28 @@
 import { Container } from "flux/utils";
 import * as React from "react";
 
-// import Paper from "@material-ui/core/Paper";
+import ReadingsStatsStore from "../../stores/ReadingsStatsStore";
+import ValueRange from "../ValueRange";
 
-import ReadingsStatsStore from "../stores/ReadingsStatsStore";
-import ValueRange from "./ValueRange";
+interface ReadingsStats {
+    min: number;
+    max: number;
+    ave: number;
+    count: number;
+}
 
-class ReadingsStats extends React.Component <{}, {stats}> {
+class ReadingsStats extends React.Component <{}, ReadingsStats> {
     public static getStores() {
         return [ReadingsStatsStore];
     }
 
     public static calculateState(prevState) {
-        return {
-            stats: ReadingsStatsStore.getState()
-        };
+        return ReadingsStatsStore.getState();
     }
 
     public render() {
-        const stats = this.state.stats;
-        if (stats === null) return null;
+        const stats = this.state;
+        if (this.state === null) return null;
         return (
             <ValueRange
                 min={stats.min}
