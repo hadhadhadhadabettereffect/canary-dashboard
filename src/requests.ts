@@ -42,6 +42,20 @@ export function getDeviceList() {
     req.send();
 }
 
+export function postNewReading(data: any) {
+    const req = new XMLHttpRequest();
+    req.open("POST", "/readings", true);
+    req.setRequestHeader("Content-type", "application/json");
+    req.send(JSON.stringify(data));
+    req.onload = function() {
+        const success = req.status === 201;
+        DashboardActionCreators.showMsg({
+            success: !!success,
+            text: success ? "reading added" : req.responseText
+        });
+    };
+}
+
 export function postNewDevice(data: any) {
     const req = new XMLHttpRequest();
     req.open("POST", "/devices", true);

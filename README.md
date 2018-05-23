@@ -21,3 +21,4 @@
 ### Assumptions
 
 * the "value" property for devices and readings will always be an integer and can be expressed as an 8-bit int (between -128 and 127). If this is not the case, the array type for the values array in public/worker.js can be changed
+* devices are only of one type. so when creating readings for a device, post message is set using device's type rather than allowing it to be editable

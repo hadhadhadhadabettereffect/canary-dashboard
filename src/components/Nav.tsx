@@ -9,26 +9,13 @@ import AddIcon from "@material-ui/icons/Add";
 
 import PopupForm from "./PopupForm";
 import { postNewDevice } from "../requests";
-
-
-const deviceFormFields = [
-    {
-        name: "name",
-        type: "text",
-        required: true
-    }, {
-        name: "type",
-        type: "select",
-        options: ["temperature", "humidity", "airquality"]
-    }
-];
-
+import { deviceFormFields } from "../constants/formfields";
 
 /**
  * wrapping container
  */
 function Nav() {
-    const deviceBtn = (<AddIcon/>);
+    const deviceBtn = [(<AddIcon/>), "add device"];
     return (
         <AppBar position="static">
             <Toolbar>

@@ -1,9 +1,23 @@
 import { Container } from "flux/utils";
 import * as React from "react";
 
-import ReadingsListStore from "../stores/ReadingsListStore";
-import FakeTable from "./FakeTable";
+import Paper from "@material-ui/core/Paper";
+import AddIcon from "@material-ui/icons/Add";
 
+import { readingFormFields } from "../constants/formfields";
+import { postNewReading } from "../requests";
+import ReadingsListStore from "../stores/ReadingsListStore";
+import DeviceDetailsStore from "../stores/DeviceDetailsStore";
+import FakeTable from "./FakeTable";
+import PopupForm from "./PopupForm";
+
+
+function createReading(data) {
+    postNewReading(Object.assign({
+        deviceId: DeviceDetailsStore.getState().id,
+        type: DeviceDetailsStore.getState().type
+    }, data));
+}
 
 class ReadingsList extends React.Component<{}, {dates, values}> {
     public static getStores() {
@@ -12,9 +26,6 @@ class ReadingsList extends React.Component<{}, {dates, values}> {
 
     public static calculateState(prevState) {
         return ReadingsListStore.getState();
-        // {
-        //     data: ReadingsListStore.getState()
-        // };
     }
 
     public render() {
@@ -30,12 +41,18 @@ class ReadingsList extends React.Component<{}, {dates, values}> {
                 width: 70
             }];
         return (
-            <div style={{width: "300px", height: "500px"}}>
-                <FakeTable data={tableDefs} />
-            </div>
+            <Paper>
+                <PopupForm
+                    fields={readingFormFields}
+                    handleSubmit={createReading}
+                    buttonContent={[(<AddIcon />), "add reading"]}
+                />
+                <div style={{width: "300px", height: "500px"}}>
+                    <FakeTable data={tableDefs} />
+                </div>
+            </Paper>
         );
     }
-
 }
 
 export default Container.create(ReadingsList);

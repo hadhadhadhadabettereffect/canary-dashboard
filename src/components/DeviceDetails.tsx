@@ -5,6 +5,7 @@ import ReadingsList from "./ReadingsList";
 import ReadingsChart from "./ReadingsChart";
 import ReadingsStats from "./ReadingsStats";
 
+
 function DeviceDetails() {
     return (
         <div>
