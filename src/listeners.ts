@@ -1,6 +1,6 @@
 import DashboardActionCreators from "./actions/DashboardActionCreators";
 import { ClickTarget } from "./constants/AppConstants";
-
+import { handleMouseDown } from "./components/Chart";
 
 document.body.addEventListener("mousedown", function(event: MouseEvent) {
     const target = (event.target as HTMLElement).getAttribute("data-target");
@@ -12,7 +12,7 @@ document.body.addEventListener("mousedown", function(event: MouseEvent) {
                 break;
 
             case ClickTarget.chart:
-                console.log("start chart");
+                handleMouseDown(event);
                 break;
         }
     }

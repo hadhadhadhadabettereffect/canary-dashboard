@@ -1,8 +1,5 @@
 import { Container } from "flux/utils";
 import * as React from "react";
-import { deleteDevice } from "../requests";
-
-
 import {
     IconButton,
     Paper,
@@ -12,7 +9,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import DeviceDetailsStore,
     { DeviceDetailsState } from "../stores/DeviceDetailsStore";
-
+import { deleteDevice } from "../requests";
+import { setChartType } from "./Chart";
 
 class DeviceOverview extends React.Component<{}, DeviceDetailsState> {
     public static getStores() {
@@ -20,7 +18,9 @@ class DeviceOverview extends React.Component<{}, DeviceDetailsState> {
     }
 
     public static calculateState(prevState) {
-        return DeviceDetailsStore.getState();
+        const state = DeviceDetailsStore.getState();
+        if (state.type.length) setChartType(state.type);
+        return state;
     }
 
     public render() {
@@ -28,13 +28,13 @@ class DeviceOverview extends React.Component<{}, DeviceDetailsState> {
         return (
             <Paper style={{ padding: "32px 16px" }}>
                 <div>
-                    <IconButton aria-label="Delete device" onClick={this.handleDelete}>
-                        <DeleteIcon />
-                    </IconButton>
-                </div>
-                <div>
                     <Typography variant="headline">{this.state.name}</Typography>
                     <Typography variant="caption">{this.state.type}</Typography>
+                </div>
+                <div style={{ position: "absolute", right: "60px", top: "60px" }}>
+                    <IconButton onClick={this.handleDelete}>
+                        <DeleteIcon />
+                    </IconButton>
                 </div>
             </Paper>
         );

@@ -17,10 +17,8 @@ class ReadingsChart extends React.Component<{}, { values: any; focus: string | n
 
     public static calculateState(prevState) {
         const s = ReadingsListStore.getState();
-        if (s !== null) setData(s);
-        return {
-            values: s
-        };
+        if (s !== null) setData(s.values);
+        return s;
     }
 
     chartWrap;

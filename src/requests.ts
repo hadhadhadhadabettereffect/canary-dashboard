@@ -42,11 +42,11 @@ export function getDeviceList() {
     req.send();
 }
 
-export function postNewDevice(dataString: string) {
+export function postNewDevice(data: any) {
     const req = new XMLHttpRequest();
     req.open("POST", "/devices", true);
     req.setRequestHeader("Content-type", "application/json");
-    req.send(dataString);
+    req.send(JSON.stringify(data));
     req.onload = function() {
         const success = req.status === 201;
         // get updated device list if creation successful
@@ -64,7 +64,6 @@ export function deleteDevice(id: string) {
     req.open("DELETE", "/devices/" + id, true);
     req.onreadystatechange = function() {
         if (req.readyState === 4) {
-            console.log(req);
             const success = req.status >= 200 && req.status < 300;
             if (success) getDeviceList();
             DashboardActionCreators.showMsg({

@@ -5,27 +5,28 @@ import ReadingsListStore from "../stores/ReadingsListStore";
 import FakeTable from "./FakeTable";
 
 
-class ReadingsList extends React.Component<{}, {data}> {
+class ReadingsList extends React.Component<{}, {dates, values}> {
     public static getStores() {
         return [ReadingsListStore];
     }
 
     public static calculateState(prevState) {
-        return {
-            data: ReadingsListStore.getState()
-        };
+        return ReadingsListStore.getState();
+        // {
+        //     data: ReadingsListStore.getState()
+        // };
     }
 
     public render() {
-        const data = this.state.data;
-        if (data === null) return null;
+        // const data = this.state.data;
+        if (!this.state.values) return null;
         const tableDefs = [{
                 name: "created at",
-                text: data.dates,
+                text: this.state.dates,
                 width: 230
             }, {
                 name: "value",
-                text: data.values.join("\n"),
+                text: this.state.values.join("\n"),
                 width: 70
             }];
         return (

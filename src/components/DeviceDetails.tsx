@@ -8,9 +8,9 @@ import ReadingsStats from "./ReadingsStats";
 function DeviceDetails() {
     return (
         <div>
+            <DeviceOverview />
             <ReadingsChart />
             <ReadingsStats />
-            <DeviceOverview />
             <ReadingsList />
         </div>
     );

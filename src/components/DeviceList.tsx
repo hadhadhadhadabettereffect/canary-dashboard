@@ -36,7 +36,7 @@ class DeviceList extends React.Component<{}, { devices: any; focus: string|null;
                 />
                 <DeviceListGroup
                     focus={this.state.focus}
-                    type="air quality"
+                    type="airquality"
                     data={this.state.devices.airquality}
                 />
             </Paper>

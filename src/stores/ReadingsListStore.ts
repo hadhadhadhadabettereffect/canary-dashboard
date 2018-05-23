@@ -2,7 +2,6 @@ import { ReduceStore } from "flux/utils";
 import { ActionTypes } from "../constants/AppConstants";
 import AppDispatcher from "../dispatcher/AppDispatcher";
 
-
 class ReadingsListStore extends (ReduceStore as any) {
     public getInitialState() {
         return null;

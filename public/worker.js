@@ -1,5 +1,5 @@
-var count = 100;
-var readings = new Int8Array(count);
+var count = 0;
+var readings = new Int8Array(300);
 
 onmessage = function(msg) {
     switch (msg.data.type) {
@@ -8,7 +8,7 @@ onmessage = function(msg) {
             break;
 
         case "stats":
-            checkStats(msg.data.data.from, msg.data.data.to);
+            checkStats(msg.data.data[0], msg.data.data[1]);
             break;
 
         case "list":
@@ -19,7 +19,7 @@ onmessage = function(msg) {
 
 function checkStats(from, to) {
     if (!readings) return;
-    if (to >= readings.length) to = readings.length - 1;
+    if (to >= count) to = count - 1;
 
     var min = readings[from],
         max = readings[from],
@@ -103,6 +103,14 @@ function parseDeviceList(data) {
     };
     // group devices by type, normalize values
     for (var i=0, j=data.length; i<j; ++i) {
+        if (!stats.hasOwnProperty(data[i].type)) {
+            stats[data[i].type] = {
+                devices: [],
+                min: 0,
+                max: 0,
+                ave: 0
+            };
+        }
         stats[data[i].type].devices.push({
             name: data[i].name,
             id: data[i].id,
@@ -114,7 +122,6 @@ function parseDeviceList(data) {
     checkRange(stats.temperature);
     checkRange(stats.humidity);
     checkRange(stats.airquality);
-
     postMessage({
         type: "list",
         data: stats

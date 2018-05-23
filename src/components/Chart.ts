@@ -1,6 +1,6 @@
 import { chartOptions } from "../constants/options";
-import ReadingsListStore from "../stores/ReadingsListStore";
 import { worker } from "../workerInterface";
+import { ClickTarget } from "../constants/AppConstants";
 
 const enum ChartUpdate {
     _selection,
@@ -31,14 +31,14 @@ let startX = 0,
     height = chartOptions.style.height,
     colWidth = 30;
 let listenersAttached = false,
-    mounted = false,
     isSelecting = false,
     initSelection = false;
 let chartType = "",
     barColor = "",
     selectedColor = "";
 let data: any[] = [];
-
+canvas.width = width;
+canvas.height = height;
 wrap.style.width = "100%";
 wrap.style.height = "100%";
 wrap.style.overflow = "hidden";
@@ -54,7 +54,7 @@ selectionEl.style.transformOrigin = "left center 0";
 selectionEl.style.display = "none";
 wrap.appendChild(canvas);
 wrap.appendChild(selectionEl);
-ReadingsListStore.addListener(updateState);
+canvas.setAttribute("data-target", "" + ClickTarget.chart);
 
 export function mountChart(el: HTMLElement) {
     if (!(el && el instanceof HTMLElement)) return;
@@ -65,14 +65,10 @@ export function mountChart(el: HTMLElement) {
     canvas.width = width;
     canvas.height = height;
     el.appendChild(wrap);
-    mounted = true;
 }
 
 export function unmount() {
-    if (mounted) {
-        mounted = false;
-        if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
-    }
+    if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
     setListeners(false);
 }
 
@@ -107,7 +103,6 @@ export function update() {
 }
 
 export function setData(arr: number[]) {
-    if (!Array.isArray(arr)) return;
     data = arr;
     updateStart = 0;
     updateEnd = data.length - 1;
@@ -118,6 +113,7 @@ export function setData(arr: number[]) {
     if (updateEnd) {
         colWidth = ((width / updateEnd) + 0.5) >>> 0;
     }
+    ctx.clearRect(0, 0, width, height);
     changes |= ChartUpdate.repaint;
 }
 
@@ -155,8 +151,19 @@ export function setChartType(type: string) {
     }
 }
 
-function updateState() {
-    setData(ReadingsListStore.getState());
+
+
+function handleKeyDown(event) {
+    switch (event.key) {
+        case "Escape":
+            clearSelection();
+            break;
+
+        case "ArrowLeft":
+        case "ArrowRight":
+            focusNext(event.key === "ArrowLeft", event.shiftKey);
+            break;
+    }
 }
 
 function repaintData(): boolean {
@@ -171,7 +178,7 @@ function repaintData(): boolean {
 }
 
 function paintCol(i: number) {
-    const colHeight = ((heightAdjust * (data[i].value - yMin) + 0.5) >>> 0);
+    const colHeight = ((heightAdjust * (data[i] - yMin) + 0.5) >>> 0);
     ctx.fillStyle = i >= selectStart && i <= selectEnd ?
         selectedColor : barColor;
     ctx.fillRect(i * colWidth, height - colHeight, colWidth, colHeight);
@@ -272,17 +279,19 @@ function setListeners(active: boolean) {
             listenersAttached = true;
             window.addEventListener("mousemove", handleMouseMove, false);
             window.addEventListener("mouseup", cancelDrag, false);
+            window.addEventListener("keydown", handleKeyDown, false);
         }
     } else if (listenersAttached) {
         listenersAttached = false;
         window.removeEventListener("mousemove", handleMouseMove, false);
         window.removeEventListener("mouseup", cancelDrag, false);
+        window.removeEventListener("keydown", handleKeyDown, false);
     }
 }
 
 function animate() {
     requestAnimationFrame(animate);
-    if (mounted) update();
+    update();
 }
 
 requestAnimationFrame(animate);

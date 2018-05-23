@@ -15,7 +15,7 @@ export const chartOptions = {
     },
     humidity: {
         dataColor: "green",
-        selectionColor: "blue",
+        selectionColor: "gray",
         yMin: 0,
         yMax: 100
     },
