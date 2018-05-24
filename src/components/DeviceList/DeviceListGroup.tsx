@@ -12,8 +12,9 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { ClickTarget } from "../constants/AppConstants";
-import ValueRange from "./ValueRange";
+import { ClickTarget } from "../../constants/AppConstants";
+import ValueRange from "../ValueRange";
+
 
 interface DeviceGroupData {
     min: number;
@@ -28,10 +29,11 @@ interface DeviceGroupProps {
     data: DeviceGroupData;
 }
 
+
 /**
  * list of devices of a particular type (temperature, humidity, airquality)
  */
-function DeviceListGroup(props: DeviceGroupProps) {
+export default function DeviceListGroup(props: DeviceGroupProps) {
     return (
         <ExpansionPanel defaultExpanded>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -93,5 +95,3 @@ function DeviceListGroup(props: DeviceGroupProps) {
         </ExpansionPanel>
     );
 }
-
-export default DeviceListGroup;

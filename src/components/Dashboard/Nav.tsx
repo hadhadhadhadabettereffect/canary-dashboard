@@ -7,9 +7,9 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-import PopupForm from "./PopupForm";
-import { postNewDevice } from "../requests";
-import { deviceFormFields } from "../constants/formfields";
+import PopupForm from "../PopupForm";
+import { postNewDevice } from "../../requests";
+import { deviceFormFields } from "../../constants/formfields";
 
 /**
  * wrapping container

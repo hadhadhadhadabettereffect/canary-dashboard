@@ -3,8 +3,8 @@ import * as React from "react";
 
 import Paper from "@material-ui/core/Paper";
 
-import DeviceDetailsStore from "../stores/DeviceDetailsStore";
-import DeviceListStore from "../stores/DeviceListStore";
+import DeviceDetailsStore from "../../stores/DeviceDetailsStore";
+import DeviceListStore from "../../stores/DeviceListStore";
 import DeviceListGroup from "./DeviceListGroup";
 
 

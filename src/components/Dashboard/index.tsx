@@ -1,20 +1,16 @@
 import * as React from "react";
 
-import DeviceList from "./DeviceList";
-// import ReadingsList from "./ReadingsList";
-import FlashMsg from "./FlashMsg";
+import FlashMsg from "../FlashMsg";
+import DeviceList from "../DeviceList";
+import DeviceDetails from "../DeviceDetails";
 import Nav from "./Nav";
-// import ReadingsStats from "./ReadingsStats";
-
-import DeviceDetails from "./DeviceDetails";
-
 import "./Dashboard.css";
 
 
 /**
  * wrapping container
  */
-function Dashboard() {
+export default function Dashboard() {
     return (
         <div>
             <Nav />
@@ -32,5 +28,3 @@ function Dashboard() {
         </div>
     );
 }
-
-export default Dashboard;

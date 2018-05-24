@@ -13,7 +13,7 @@ interface FableProps {
     data: FableColProps[];
 }
 
-function Fable(props: FableProps) {
+export default function Fable(props: FableProps) {
     let w = 0;
     const thead = props.data.map((d) => {
         const styles = {
@@ -58,5 +58,3 @@ function Fable(props: FableProps) {
         </div>
     );
 }
-
-export default Fable;

@@ -18,7 +18,7 @@ interface ValueRangeProps {
 /**
  * displays min, max, and average values
  */
-function ValueRange(props: ValueRangeProps) {
+export default function ValueRange(props: ValueRangeProps) {
     return (
         <div className="valuerange">
             <div className="valuerange__label">
@@ -47,5 +47,3 @@ function ValueRange(props: ValueRangeProps) {
         </div>
     );
 }
-
-export default ValueRange;
