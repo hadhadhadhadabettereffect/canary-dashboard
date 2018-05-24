@@ -22,7 +22,7 @@ class ReadingsStats extends React.Component <{}, ReadingsStats> {
 
     public render() {
         const stats = this.state;
-        if (this.state === null) return null;
+        if (stats === null) return null;
         return (
             <ValueRange
                 min={stats.min}

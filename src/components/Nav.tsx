@@ -15,7 +15,6 @@ import { deviceFormFields } from "../constants/formfields";
  * wrapping container
  */
 function Nav() {
-    const deviceBtn = [(<AddIcon/>), "add device"];
     return (
         <AppBar position="static">
             <Toolbar>
@@ -25,7 +24,7 @@ function Nav() {
                 <PopupForm
                     fields={deviceFormFields}
                     handleSubmit={postNewDevice}
-                    buttonContent={deviceBtn}
+                    buttonContent={[(<AddIcon key="btn" />), "add device"]}
                 />
             </Toolbar>
         </AppBar>

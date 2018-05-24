@@ -52,8 +52,7 @@ export default class ModalForm extends React.Component <ModalFormProps, {}> {
                 <DialogContent>
                     <form onChange={this.handleChange} autoComplete="off">
                         {this.props.fields.map((f) => {
-                            return React.createElement(FormInput,
-                                Object.assign({key: f.name}, f));
+                            return (<FormInput key={f.name} {...f} />);
                         })}
                     </form>
                 </DialogContent>

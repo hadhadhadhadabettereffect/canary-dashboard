@@ -29,7 +29,6 @@ class ReadingsList extends React.Component<{}, {dates, values}> {
     }
 
     public render() {
-        // const data = this.state.data;
         if (!this.state.values) return null;
         const tableDefs = [{
                 name: "created at",
@@ -45,7 +44,7 @@ class ReadingsList extends React.Component<{}, {dates, values}> {
                 <PopupForm
                     fields={readingFormFields}
                     handleSubmit={createReading}
-                    buttonContent={[(<AddIcon />), "add reading"]}
+                    buttonContent={[(<AddIcon key="add"/>), "add reading"]}
                 />
                 <div style={{width: "300px", height: "500px"}}>
                     <FakeTable data={tableDefs} />
