@@ -44,11 +44,13 @@ export function getDeviceList() {
 
 export function postNewReading(data: any) {
     const req = new XMLHttpRequest();
+    const id = data.deviceId;
     req.open("POST", "/readings", true);
     req.setRequestHeader("Content-type", "application/json");
     req.send(JSON.stringify(data));
     req.onload = function() {
         const success = req.status === 201;
+        if (success) getReadingsList(id);
         DashboardActionCreators.showMsg({
             success: !!success,
             text: success ? "reading added" : req.responseText

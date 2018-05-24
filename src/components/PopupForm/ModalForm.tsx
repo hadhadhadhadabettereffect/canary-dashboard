@@ -8,13 +8,13 @@ import {
     DialogTitle,
 } from "@material-ui/core";
 
-import FormInput, { FormInputProps } from "./FormInput";
+import FormInput from "./FormInput";
 
 
 export interface ModalFormProps {
     open: boolean;
     title: string; // db col name
-    fields: FormInputProps[];
+    fields: any[];
     handleSubmit(data: any): void; // calls fn with input values on submit
     handleClose(): void;
 }
@@ -52,7 +52,7 @@ export default class ModalForm extends React.Component <ModalFormProps, {}> {
                 <DialogContent>
                     <form onChange={this.handleChange} autoComplete="off">
                         {this.props.fields.map((f) => {
-                            return (<FormInput key={f.name} {...f} />);
+                            return (<FormInput handleChange={this.handleChange} key={f.name} {...f} />);
                         })}
                     </form>
                 </DialogContent>

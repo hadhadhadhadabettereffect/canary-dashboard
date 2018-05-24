@@ -15,6 +15,7 @@ export interface FormInputProps {
     required?: boolean;
     value?: any;
     options?: string[];
+    handleChange(event): void;
 }
 
 export default class FormInput extends React.Component<FormInputProps, {}> {
@@ -24,6 +25,7 @@ export default class FormInput extends React.Component<FormInputProps, {}> {
 
     handleChange = (event) => {
         this.setState({ value: event.target.value });
+        this.props.handleChange(event);
     }
 
     render() {
@@ -51,7 +53,7 @@ export default class FormInput extends React.Component<FormInputProps, {}> {
                 required={this.props.required}
                 margin="dense"
                 id={this.props.name}
-                label={this.props.name}
+                label={this.props.type === "date" ? "" : this.props.name}
                 name={this.props.name}
                 type={this.props.type}
             />

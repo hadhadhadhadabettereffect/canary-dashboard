@@ -1,4 +1,5 @@
-import { chartOptions } from "../constants/options";
+import { chartOptions,
+    LayoutMeasurement } from "../constants/options";
 import { worker } from "../workerInterface";
 import { ClickTarget } from "../constants/AppConstants";
 
@@ -27,8 +28,8 @@ let startX = 0,
     yRange = 1,
     heightAdjust = 1,
     changes = 0,
-    width = chartOptions.style.width,
-    height = chartOptions.style.height,
+    width = LayoutMeasurement.deviceDetailsWidth,
+    height = LayoutMeasurement.readingsChartHeight,
     colWidth = 30;
 let listenersAttached = false,
     isSelecting = false,
@@ -109,11 +110,9 @@ export function setData(arr: number[]) {
     selectStart = 0;
     selectEnd = 0;
     x0 = 0;
-    // if arr.length > 0
-    if (updateEnd) {
-        colWidth = ((width / updateEnd) + 0.5) >>> 0;
+    if (data.length) {
+        colWidth = ((width / data.length) + 0.5) >>> 0;
     }
-    ctx.clearRect(0, 0, width, height);
     changes |= ChartUpdate.repaint;
 }
 
@@ -151,8 +150,6 @@ export function setChartType(type: string) {
     }
 }
 
-
-
 function handleKeyDown(event) {
     switch (event.key) {
         case "Escape":
@@ -168,7 +165,7 @@ function handleKeyDown(event) {
 
 function repaintData(): boolean {
     const start = performance.now();
-    if (updateStart === 0 && updateEnd === data.length)
+    if (updateStart === 0 && updateEnd === data.length - 1)
         ctx.clearRect(0, 0, width, height);
     while (updateStart <= updateEnd) {
         paintCol(updateStart++);

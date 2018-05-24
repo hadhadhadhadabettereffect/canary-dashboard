@@ -15,46 +15,29 @@ interface FableProps {
 
 export default function Fable(props: FableProps) {
     let w = 0;
-    const thead = props.data.map((d) => {
+    const cells: any[] = [];
+    for (const d of props.data) {
         const styles = {
-            left: w + "px",
-            width: d.width + "px"
+            left: w,
+            width: d.width
         };
+        cells.push(
+            React.createElement("div", {
+                key: "h" + d.name,
+                className: "fable__head",
+                style: styles
+            }, d.name),
+            React.createElement("div", {
+                key: "b" + d.name,
+                className: "fable__col",
+                style: styles
+            }, d.text)
+        );
         w += d.width;
-        return (
-        <div
-            key={"h_" + d.name}
-            className="fabel__col--head"
-            style={styles}
-        >
-            {d.name}
-        </div>);
-    });
-    w = 0;
-    const tbody = props.data.map((d) => {
-        const styles = {
-            left: w + "px",
-            width: d.width + "px"
-        };
-        w += d.width;
-        return (
-            <div
-                key={"b_" + d.name}
-                className="fabel__col--body"
-                style={styles}
-            >
-                {d.text}
-            </div>);
-    });
-
+    }
     return (
-        <div className="fabel" style={{ width: (w + 20) + "px" }}>
-            <div className="fabel__head">
-                {thead}
-            </div>
-            <div className="fabel__body">
-                {tbody}
-            </div>
+        <div className="fable" style={{ width: (w + 20) + "px" }}>
+            {cells}
         </div>
     );
 }

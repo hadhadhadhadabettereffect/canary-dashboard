@@ -1,7 +1,7 @@
 import { Container } from "flux/utils";
 import * as React from "react";
 
-import { chartOptions } from "../../constants/options";
+import { LayoutMeasurement } from "../../constants/options";
 import ReadingsListStore from "../../stores/ReadingsListStore";
 import {
     mountChart,
@@ -37,7 +37,15 @@ class ReadingsChart extends React.Component<{}, { values: any; focus: string | n
     }
 
     render() {
-        return ( <div ref={this.chartWrap} style={chartOptions.style}/> );
+        return (
+        <div
+            ref={this.chartWrap}
+            style={{
+                width: LayoutMeasurement.deviceDetailsWidth,
+                height: LayoutMeasurement.readingsChartHeight
+            }}
+        />
+    );
     }
 }
 

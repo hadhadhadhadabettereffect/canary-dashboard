@@ -3,6 +3,7 @@ import { Container } from "flux/utils";
 
 import DeviceDetailsStore,
     { DeviceDetailsState } from "../../stores/DeviceDetailsStore";
+import { LayoutMeasurement } from "../../constants/options";
 import { setChartType } from "../Chart";
 import DeviceOverview from "./DeviceOverview";
 import ReadingsList from "./ReadingsList";
@@ -24,7 +25,7 @@ class DeviceDetails extends React.Component<{}, DeviceDetailsState> {
         if (!this.state.id.length) return null;
 
         return (
-            <div>
+            <div style={{ width: LayoutMeasurement.deviceDetailsWidth }}>
                 <DeviceOverview {...this.state} />
                 <ReadingsChart />
                 <ReadingsStats />

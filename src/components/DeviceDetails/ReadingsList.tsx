@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import AddIcon from "@material-ui/icons/Add";
 
 import { readingFormFields } from "../../constants/formfields";
+import { LayoutMeasurement } from "../../constants/options";
 import { postNewReading } from "../../requests";
 import ReadingsListStore from "../../stores/ReadingsListStore";
 import DeviceDetailsStore from "../../stores/DeviceDetailsStore";
@@ -29,24 +30,24 @@ class ReadingsList extends React.Component<{}, {dates, values}> {
     }
 
     public render() {
-        if (!this.state.values) return null;
         const tableDefs = [{
                 name: "created at",
-                text: this.state.dates,
-                width: 230
+                text: this.state.dates || "",
+                width: LayoutMeasurement.colWidthCreatedAt
             }, {
                 name: "value",
-                text: this.state.values.join("\n"),
-                width: 70
+                text: this.state.values ? this.state.values.join("\n") : "",
+                width: LayoutMeasurement.colWidthValue
             }];
         return (
             <Paper>
                 <PopupForm
                     fields={readingFormFields}
                     handleSubmit={createReading}
-                    buttonContent={[(<AddIcon key="add"/>), "add reading"]}
+                    label="add reading"
+                    buttonContent={<AddIcon/>}
                 />
-                <div style={{width: "300px", height: "500px"}}>
+                <div style={{width: LayoutMeasurement.deviceDetailsWidth}}>
                     <FakeTable data={tableDefs} />
                 </div>
             </Paper>

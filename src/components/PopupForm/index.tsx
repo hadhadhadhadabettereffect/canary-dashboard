@@ -2,12 +2,13 @@ import * as React from "react";
 
 import { Button } from "@material-ui/core";
 
-import { FormInputProps } from "./FormInput";
+// import { FormInputProps } from "./FormInput";
 import ModalForm from "./ModalForm";
 
 export interface PopupFormProps {
-    fields: FormInputProps[];
-    buttonContent: string | any;
+    fields: any[];
+    label?: string;
+    buttonContent?: any;
     handleSubmit(data: any): void;
 }
 
@@ -40,11 +41,12 @@ export default class PopupForm extends React.Component<PopupFormProps, { open: b
                     mini
                 >
                     {this.props.buttonContent}
+                    {this.props.label}
                 </Button>
                 <ModalForm
                     open={this.state.open}
                     fields={this.props.fields}
-                    title="add device"
+                    title={this.props.label || ""}
                     handleSubmit={this.handleSubmit}
                     handleClose={this.handleClose}
                 />

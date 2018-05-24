@@ -18,15 +18,15 @@ export default function DeviceOverview(props) {
     deviceId = props.id;
     return (
         <Paper style={{ padding: "32px 16px" }}>
-            <div>
+            <div style={{ display: "inline-block", width: "300px" }}>
                 <Typography variant="headline">{props.name}</Typography>
-                <Typography variant="caption">{props.type}</Typography>
             </div>
-            <div style={{ position: "absolute", right: "60px", top: "60px" }}>
+            <div style={{ display: "inline-block" }}>
                 <IconButton onClick={handleDelete}>
                     <DeleteIcon />
                 </IconButton>
             </div>
+            <Typography variant="caption">{props.type}</Typography>
         </Paper>
     );
 }

@@ -17,6 +17,7 @@ onmessage = function(msg) {
     }
 };
 
+// "to" param is inclusive
 function checkStats(from, to) {
     if (!readings) return;
     if (to >= count) to = count - 1;
@@ -24,7 +25,7 @@ function checkStats(from, to) {
     var min = readings[from],
         max = readings[from],
         ave = readings[from],
-        count = 1 + to - from;
+        count = 2 + to - from;
 
     do {
         ave += readings[from];
@@ -44,8 +45,6 @@ function checkStats(from, to) {
 }
 
 function parseReadings(arr) {
-    if (!arr.length) return;
-
     count = arr.length;
 
     var values = new Int8Array(count);

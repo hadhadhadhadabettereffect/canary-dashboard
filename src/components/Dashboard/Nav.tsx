@@ -3,7 +3,6 @@ import * as React from "react";
 import {
     AppBar,
     Toolbar,
-    Typography
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
@@ -16,15 +15,16 @@ import { deviceFormFields } from "../../constants/formfields";
  */
 function Nav() {
     return (
-        <AppBar position="static">
+        <AppBar position="static" style={{ background: "white", color: "black" }}>
             <Toolbar>
-                <Typography variant="title" color="inherit">
-                    Canary
-                </Typography>
+                <div style={{ width: 100 }}>
+                   <img src="/logo.png" />
+                </div>
                 <PopupForm
                     fields={deviceFormFields}
                     handleSubmit={postNewDevice}
-                    buttonContent={[(<AddIcon key="btn" />), "add device"]}
+                    label="add device"
+                    buttonContent={<AddIcon/>}
                 />
             </Toolbar>
         </AppBar>
